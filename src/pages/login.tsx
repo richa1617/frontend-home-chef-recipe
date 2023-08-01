@@ -1,4 +1,4 @@
-import NavigationBar from "@/components/navigationBar";
+import NavigationBar from "@/components/NavigationBar";
 
 export default function Login() {
   return (
