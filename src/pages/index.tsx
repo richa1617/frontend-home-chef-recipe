@@ -1,9 +1,7 @@
 import Head from "next/head";
-
-import NavigationBar from "@/components/navigationBar";
+import NavigationBar from "@/components/NavigationBar";
 
 import Recipe from "@/components/recipe";
-
 
 export default function Home() {
   return (
@@ -21,10 +19,7 @@ export default function Home() {
         <a href="/add-recipe">Add Recipe</a>
       </button>
 
-
-
       <Recipe />
-
     </>
   );
 }
