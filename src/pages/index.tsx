@@ -1,5 +1,9 @@
 import Head from "next/head";
+
+import NavigationBar from "@/components/navigationBar";
+
 import Recipe from "@/components/recipe";
+
 
 export default function Home() {
   return (
@@ -11,8 +15,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <NavigationBar />
       <h1>Hello</h1>
+      <button>
+        <a href="/add-recipe">Add Recipe</a>
+      </button>
+
+
+
       <Recipe />
+
     </>
   );
 }
