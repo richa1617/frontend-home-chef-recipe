@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 interface Category {
@@ -20,6 +21,7 @@ interface Recipe {
 }
 
 function RecipeList() {
+  const router = useRouter();
   const [recipes, setRecipes] = useState<null | Recipe[]>(null);
   const [activeCategory, setActiveCategory] = useState<null | string>(null);
 
@@ -60,6 +62,12 @@ function RecipeList() {
       )
     : recipes;
 
+  // to get id of recipe which is clicked
+  function clickHandleForRecipeId(id: Number) {
+    router.push(`recipes/${id}`);
+    console.log(id);
+  }
+
   return (
     <>
       <div>
@@ -84,7 +92,10 @@ function RecipeList() {
 
       {filteredRecipes.map((recipe) => {
         return (
-          <div key={recipe.id}>
+          <div
+            key={recipe.id}
+            onClick={() => clickHandleForRecipeId(recipe.id)}
+          >
             <h2>{recipe.name}</h2>
             <p>{recipe.instructions}</p>
             <p>{recipe.serves}</p>
