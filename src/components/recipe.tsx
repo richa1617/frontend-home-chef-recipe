@@ -46,7 +46,7 @@ function RecipeList() {
         recipes.category.map((category) => category.name)
       )
     )
-  );
+  ); //[breakd]
   //console.log(uniqueCategories);
 
   const clickHandler = (category: string) => {
@@ -68,42 +68,76 @@ function RecipeList() {
     console.log(id);
   }
 
+  //recipe-servers-icon
+  let serves = ["👤", "👤 👤", "👤 👤 👤", "👤 👤 👤 👤"];
+
+  //category-icons
+
+  const categoryIcons = {
+    breakfast: "🍳",
+    lunch: "🥯",
+    dinner: "🥘",
+    dessert: "🧁",
+  } as any;
+
   return (
-    <>
-      <div>
+    <main className="recipe_main">
+      <h1>Recipe</h1>
+      <input
+        type="search"
+        placeholder="Search For Recipes"
+        className="recipe_search"
+      ></input>
+      <div className="recipe_button_container">
         <button
-          className={!activeCategory ? "active-button" : ""}
+          className={` recipe_button ${!activeCategory ? "active-button" : ""}`}
           onClick={() => setActiveCategory(null)}
         >
-          All
+          <span>🍴</span> All
         </button>
         {uniqueCategories.map((category) => {
           return (
             <button
               key={category}
-              className={activeCategory === category ? "active-button" : ""}
+              className={`recipe_button  
+                ${activeCategory === category ? "active-button" : ""}
+                `}
               onClick={() => clickHandler(category)}
             >
-              {category}
+              <span>{`${categoryIcons[category]}`}</span> {category}
             </button>
           );
         })}
       </div>
 
-      {filteredRecipes.map((recipe) => {
-        return (
-          <div
-            key={recipe.id}
-            onClick={() => clickHandleForRecipeId(recipe.id)}
-          >
-            <h2>{recipe.name}</h2>
-            <p>{recipe.instructions}</p>
-            <p>{recipe.serves}</p>
-            <img src={recipe.img_url} />
-          </div>
-        );
-      })}
-    </>
+      <div className="recipe_container">
+        {filteredRecipes.map((recipe) => {
+          return (
+            <section
+              key={recipe.id}
+              onClick={() => clickHandleForRecipeId(recipe.id)}
+              className="recipe_card"
+            >
+              <div className="recipe_img">
+                <img src={recipe.img_url} className="img" />
+              </div>
+              <div className="recipe_container_right">
+                <h2>{recipe.name}</h2>
+                <div className="recipe_detail">
+                  <p>
+                    Serves <br></br> {`${serves[recipe.serves - 1]}`}
+                  </p>
+                  <p>
+                    Prep_time <br></br>
+                    {recipe.prep_time}
+                  </p>
+                </div>
+              </div>
+            </section>
+          );
+        })}
+      </div>
+    </main>
   );
 }
 

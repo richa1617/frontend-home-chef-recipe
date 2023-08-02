@@ -1,9 +1,9 @@
 function Hero() {
   return (
     <div className="hero">
-      <div className="hero_title">
-        <h1>Home Chef Recipe</h1>
-      </div>
+      <h1 className="hero_title">
+        Home <br></br> Chef <br></br> Recipe <br></br>
+      </h1>
     </div>
   );
 }

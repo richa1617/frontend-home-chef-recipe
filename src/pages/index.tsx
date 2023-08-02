@@ -16,11 +16,10 @@ export default function Home() {
       <NavigationBar />
       <Hero />
 
+      <Recipe />
       <button>
         <a href="/add-recipe">Add Recipe</a>
       </button>
-
-      <Recipe />
     </>
   );
 }

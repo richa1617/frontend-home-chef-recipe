@@ -1,20 +1,22 @@
 const NavigationBar = () => {
   return (
     <nav className="navbar">
-      <ul>
+      <ul className="navbar_list">
         <li>
           <p>🥘 HomeChefRecipes</p>
         </li>
-        <li>
-          <button className="navbar_home">
-            <a href="/">Home</a>
-          </button>
-        </li>
-        <button>
+        <div className="navbar_list_right">
           <li>
-            <a href="/login">Login</a>
+            <button>
+              <a href="/">Home</a>
+            </button>
           </li>
-        </button>
+          <button>
+            <li>
+              <a href="/login">Login</a>
+            </li>
+          </button>
+        </div>
       </ul>
     </nav>
   );
