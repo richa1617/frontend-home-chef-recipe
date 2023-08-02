@@ -8,6 +8,15 @@ interface Category {
   emoji: string;
 }
 
+interface Comment {
+  id: number;
+  name: string;
+  rating: number;
+  message: string;
+  created_at: Date;
+  recipeId: number;
+}
+
 interface Recipe {
   id: number;
   name: string;
@@ -18,6 +27,7 @@ interface Recipe {
   serves: number;
   userId: number;
   category: Category[];
+  comment: Comment[];
 }
 
 function RecipeList() {
@@ -80,12 +90,22 @@ function RecipeList() {
     dessert: "🧁",
   } as any;
 
+  //star icon
+  const starIcon = [
+    "⭐️",
+    "⭐️ ⭐️",
+    "⭐️ ⭐️ ⭐️",
+    "⭐️ ⭐️ ⭐️",
+    " ⭐️ ⭐️ ⭐️ ⭐️",
+    "⭐️ ⭐️ ⭐️ ⭐️ ⭐️",
+  ];
+
   return (
     <main className="recipe_main">
       <h1>Recipe</h1>
       <input
         type="search"
-        placeholder="Search For Recipes"
+        placeholder="Search For Recipes..."
         className="recipe_search"
       ></input>
       <div className="recipe_button_container">
@@ -93,7 +113,7 @@ function RecipeList() {
           className={` recipe_button ${!activeCategory ? "active-button" : ""}`}
           onClick={() => setActiveCategory(null)}
         >
-          <span>🍴</span> All
+          <span className="button_icons">🍴</span> All
         </button>
         {uniqueCategories.map((category) => {
           return (
@@ -104,7 +124,8 @@ function RecipeList() {
                 `}
               onClick={() => clickHandler(category)}
             >
-              <span>{`${categoryIcons[category]}`}</span> {category}
+              <span className="button_icons">{`${categoryIcons[category]}`}</span>{" "}
+              {category}
             </button>
           );
         })}
@@ -118,18 +139,41 @@ function RecipeList() {
               onClick={() => clickHandleForRecipeId(recipe.id)}
               className="recipe_card"
             >
-              <div className="recipe_img">
-                <img src={recipe.img_url} className="img" />
-              </div>
+              <div
+                style={{
+                  backgroundImage: `url(${recipe.img_url})`,
+                }}
+                className="recipe_img"
+              ></div>
               <div className="recipe_container_right">
                 <h2>{recipe.name}</h2>
-                <div className="recipe_detail">
+                <p>
+                  {
+                    starIcon[
+                      recipe.comment.length == 0
+                        ? 0
+                        : recipe.comment
+                            .map((c) => c.rating)
+                            .reduce((a, b) => a + b) / recipe.comment.length
+                    ]
+                  }
+                </p>
+                <div className="recipe_bottom">
                   <p>
-                    Serves <br></br> {`${serves[recipe.serves - 1]}`}
+                    <span className="recipe_bottom_heading">Serves</span>{" "}
+                    <br></br>
+                    <span className="recipe_bottom_content">{`${
+                      serves[recipe.serves - 1]
+                    }`}</span>
                   </p>
+                  <div>|</div>
                   <p>
-                    Prep_time <br></br>
-                    {recipe.prep_time}
+                    <span className="recipe_bottom_heading">Prep time</span>{" "}
+                    <br></br>
+                    <span className="recipe_bottom_content">
+                      {" "}
+                      {recipe.prep_time} min
+                    </span>
                   </p>
                 </div>
               </div>
