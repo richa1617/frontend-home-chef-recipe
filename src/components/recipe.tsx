@@ -99,6 +99,7 @@ function RecipeList() {
             <h2>{recipe.name}</h2>
             <p>{recipe.instructions}</p>
             <p>{recipe.serves}</p>
+            <img src={recipe.img_url} />
           </div>
         );
       })}

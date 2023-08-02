@@ -1,16 +1,20 @@
 const NavigationBar = () => {
   return (
-    <nav>
+    <nav className="navbar">
       <ul>
         <li>
           <p>🥘 HomeChefRecipes</p>
         </li>
         <li>
-          <a href="/">Home</a>
+          <button className="navbar_home">
+            <a href="/">Home</a>
+          </button>
         </li>
-        <li>
-          <a href="/login">Login</a>
-        </li>
+        <button>
+          <li>
+            <a href="/login">Login</a>
+          </li>
+        </button>
       </ul>
     </nav>
   );
