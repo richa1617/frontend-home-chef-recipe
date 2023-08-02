@@ -4,21 +4,21 @@ import { useState, useEffect } from "react";
 import AddCommentForm from "@/components/AddCommentForm";
 
 interface Recipe {
-  id: Number;
-  name: String;
-  img_url: String;
-  instructions: String;
-  ingredients: String;
-  prep_time: Number;
-  serves: Number;
-  userId: Number;
+  id: number;
+  name: string;
+  img_url: string;
+  instructions: string;
+  ingredients: string;
+  prep_time: number;
+  serves: number;
+  userId: number;
   category: Category;
 }
 
 interface Category {
-  id: Number;
-  name: String;
-  emoji: String;
+  id: number;
+  name: string;
+  emoji: string;
 }
 
 const RecipesPage = () => {
@@ -51,22 +51,45 @@ const RecipesPage = () => {
   const prepTimeAsString = String(recipe.prep_time);
   return (
     <>
-      <h1>{recipe.name}</h1>
-      <h3>{/* {recipe.category.emoji} {recipe.category.name} */}</h3>
-      <p>{recipe.name}'s</p>
-      <p>Serves {servesAsString}</p>
-      <p>Prep Time {prepTimeAsString}</p>
-      <div>
-        <h2>Instructions</h2>
-        <p>{recipe.instructions}</p>
+      <div
+        className="recipeHero"
+        style={{
+          backgroundImage: `url(${recipe.img_url})`,
+        }}
+        title={`picture of ${recipe.name}`}
+      >
+        <h1 className="recipeH1">{recipe.name}</h1>
+        {/* <h3>{recipe.category.name}</h3> */}
+        <span>Placeholder for Recipe Categories</span>
+        <span>Placeholder for Star Rating</span>
+        <span>⭐️⭐️⭐️⭐️⭐️(hardcoded)</span>
+        <div className="blackOpacity"></div>
       </div>
-      <div>
-        <h2>Ingredients</h2>
-        <ul>
-          <li>{recipe.ingredients}</li>
-        </ul>
+
+      <div className="recipeContainer">
+        <div className="recipeContainerHeader">
+          <h2>{recipe.name}</h2>
+          <div className="recipeContainerHeaderRightPart">
+            <h2>Serves {servesAsString}</h2>
+            <h2>Prep Time {prepTimeAsString}</h2>
+          </div>
+        </div>
+        <div className="recipeContainerBody">
+          <h2>Instructions</h2>
+          <p>{recipe.instructions}</p>
+          <h2>Ingredients</h2>
+          <ul>
+            <li>{recipe.ingredients}</li>
+          </ul>
+        </div>
       </div>
-      <AddCommentForm />
+      <div className="addCommentSection">
+        <h1>Add a Comment</h1>
+        <AddCommentForm />
+      </div>
+      <div className="previousCommentsSection">
+        <span>Placeholder for user comments</span>
+      </div>
     </>
   );
 };
