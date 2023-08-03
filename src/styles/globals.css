@@ -87,6 +87,7 @@
   background-position: 1% center;
   fill: #808080;
   opacity: 0.8;
+  padding-left: 50px;
 }
 
 input[type="search"]::placeholder {
@@ -178,7 +179,6 @@ input[type="search"]::placeholder {
   margin-top: auto;
 }
 
-
 .navbarDetailPage {
   background-color: #febd2f;
   padding: 30px;
@@ -187,7 +187,6 @@ input[type="search"]::placeholder {
   position: relative;
   z-index: 8;
 }
-
 
 .recipe_bottom_heading {
   color: #808080;

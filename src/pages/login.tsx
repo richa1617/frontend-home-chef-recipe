@@ -1,8 +1,11 @@
 import NavigationBar from "@/components/NavigationBar";
 import axios from "axios";
-import { use } from "react";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function Login() {
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const userName = event.currentTarget.userName.value;
@@ -18,9 +21,13 @@ export default function Login() {
         username: userName,
         password: userPassword,
       });
-      console.log(response.data.token);
+      // console.log(response.data.token); // we are getting the token
+      setError(null);
+
+      localStorage.setItem("token", response.data.token);
+      router.push("/");
     } catch (error) {
-      console.log("Something went wrong");
+      setError("Something went wrong");
     }
   }
   return (
@@ -36,6 +43,7 @@ export default function Login() {
         <button type="submit" className="login_form_btn">
           Login
         </button>
+        {error ? <p>Something went wrong</p> : ""}
       </form>
     </div>
   );
