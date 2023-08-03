@@ -40,34 +40,53 @@ export default function AddRecipe() {
   return (
     <>
       <NavigationBar />
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="recipe-name">Recipe-Name</label>
+      <div className="add-recipe-hero-img"></div>
+      <form onSubmit={handleSubmit} className="add_recipe_form">
+        <label htmlFor="recipe-name">Recipe-Name</label> <br></br>
         <input type="text" id="recipe-name" name="recipeName" /> <br></br>
         <label htmlFor="instructions">Instructions</label>
         <br></br>
-        <textarea id="instruction" name="instructions" />
+        <textarea id="instruction" name="instructions" rows={8} />
         <br></br>
         <label htmlFor="ingredients">Ingredients</label> <br></br>
-        <textarea id="ingredients" name="ingredients" />
+        <textarea id="ingredients" name="ingredients" rows={5} />
         <br></br>
-        <label htmlFor="prep_time">Prep_Time</label>
-        <br></br>
-        <input type="number" id="prep_time" name="prepTime" /> <br></br>
-        <label htmlFor="serves">Servers</label>
-        <br></br>
-        <input type="number" id="serves" name="servers" /> <br></br>
+        <div className="add_recipe_form_prep_serves">
+          <div className="add_recipe_form_prep">
+            <label htmlFor="prep_time">Prep_Time</label> <br></br>
+            <input type="number" id="prep_time" name="prepTime" />
+          </div>
+
+          <div className="add_recipe_form_serves">
+            <label htmlFor="serves">Serves</label> <br></br>
+            <input type="number" id="serves" name="servers" />
+          </div>
+        </div>
         <label htmlFor="imgr">Img_url</label>
         <br></br>
         <input type="text" id="img" name="img" /> <br></br>
         <h3>Category</h3>
-        <label htmlFor="breakfast">Breakfast</label>
-        <input type="checkbox" id="breakfast" name="breakfast" />
-        <label htmlFor="lunch">Lunch</label>
-        <input type="checkbox" id="lunch" name="lunch" />
-        <label htmlFor="dinner">Dinner</label>{" "}
-        <input type="checkbox" id="dinner" name="dinner" />
-        <label htmlFor="dessert">Dinner</label>
-        <input type="checkbox" id="dessert" name="dessert" />
+        <div className="add_recipe_category">
+          <div>
+            <input type="checkbox" id="breakfast" name="breakfast" />
+            <label htmlFor="breakfast">Breakfast</label>
+          </div>
+
+          <div>
+            <input type="checkbox" id="lunch" name="lunch" />
+            <label htmlFor="lunch">Lunch</label>
+          </div>
+
+          <div>
+            <input type="checkbox" id="dinner" name="dinner" />
+            <label htmlFor="dinner">Dinner</label>{" "}
+          </div>
+
+          <div>
+            <input type="checkbox" id="dessert" name="dessert" />
+            <label htmlFor="dessert">Dinner</label>
+          </div>
+        </div>
         <button type="submit">Save</button>
       </form>
     </>
