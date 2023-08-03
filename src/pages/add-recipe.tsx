@@ -46,10 +46,10 @@ export default function AddRecipe() {
         <input type="text" id="recipe-name" name="recipeName" /> <br></br>
         <label htmlFor="instructions">Instructions</label>
         <br></br>
-        <textarea id="instruction" name="instructions" />
+        <textarea id="instruction" name="instructions" rows={8} />
         <br></br>
         <label htmlFor="ingredients">Ingredients</label> <br></br>
-        <textarea id="ingredients" name="ingredients" />
+        <textarea id="ingredients" name="ingredients" rows={5} />
         <br></br>
         <div className="add_recipe_form_prep_serves">
           <div className="add_recipe_form_prep">
@@ -66,14 +66,27 @@ export default function AddRecipe() {
         <br></br>
         <input type="text" id="img" name="img" /> <br></br>
         <h3>Category</h3>
-        <label htmlFor="breakfast">Breakfast</label>
-        <input type="checkbox" id="breakfast" name="breakfast" />
-        <label htmlFor="lunch">Lunch</label>
-        <input type="checkbox" id="lunch" name="lunch" />
-        <label htmlFor="dinner">Dinner</label>{" "}
-        <input type="checkbox" id="dinner" name="dinner" />
-        <label htmlFor="dessert">Dinner</label>
-        <input type="checkbox" id="dessert" name="dessert" />
+        <div className="add_recipe_category">
+          <div>
+            <input type="checkbox" id="breakfast" name="breakfast" />
+            <label htmlFor="breakfast">Breakfast</label>
+          </div>
+
+          <div>
+            <input type="checkbox" id="lunch" name="lunch" />
+            <label htmlFor="lunch">Lunch</label>
+          </div>
+
+          <div>
+            <input type="checkbox" id="dinner" name="dinner" />
+            <label htmlFor="dinner">Dinner</label>{" "}
+          </div>
+
+          <div>
+            <input type="checkbox" id="dessert" name="dessert" />
+            <label htmlFor="dessert">Dinner</label>
+          </div>
+        </div>
         <button type="submit">Save</button>
       </form>
     </>

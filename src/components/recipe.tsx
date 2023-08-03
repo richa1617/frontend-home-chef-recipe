@@ -75,7 +75,7 @@ function RecipeList() {
   // to get id of recipe which is clicked
   function clickHandleForRecipeId(id: Number) {
     router.push(`recipe/${id}`);
-    console.log(id);
+    //console.log(id);
   }
 
   //recipe-servers-icon

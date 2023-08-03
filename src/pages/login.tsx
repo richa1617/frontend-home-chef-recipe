@@ -9,14 +9,19 @@ export default function Login() {
     const userPassword = event.currentTarget.userPassword.value;
 
     console.log(userName);
+    if (!userName && !userPassword) {
+      return;
+    }
     console.log(userPassword);
-
-    const response = await axios.post("http://localhost:3000/login", {
-      username: userName,
-      password: userPassword,
-    });
-
-    console.log(response.data.token);
+    try {
+      const response = await axios.post("http://localhost:3000/login", {
+        username: userName,
+        password: userPassword,
+      });
+      console.log(response.data.token);
+    } catch (error) {
+      console.log("Something went wrong");
+    }
   }
   return (
     <div className="login-bg-img">
