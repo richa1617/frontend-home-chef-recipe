@@ -1,5 +1,5 @@
 import NavigationBar from "@/components/NavigationBar";
-import { useState } from "react";
+import { useRouter } from "next/router";
 
 // interface FormData{
 //   recipeName:string;
@@ -12,6 +12,7 @@ import { useState } from "react";
 // }
 
 export default function AddRecipe() {
+  const router = useRouter();
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     const recipeName = event.currentTarget.recipeName.value;
     const instructions = event.currentTarget.instructions.value;
@@ -37,10 +38,16 @@ export default function AddRecipe() {
 
     event.preventDefault();
   }
+
+  function cancelHandler() {
+    router.push("/");
+  }
   return (
     <>
       <NavigationBar />
-      <div className="add-recipe-hero-img"></div>
+      <div className="add-recipe-hero-img">
+        <h1>Add New Recipe</h1>
+      </div>
       <form onSubmit={handleSubmit} className="add_recipe_form">
         <label htmlFor="recipe-name">Recipe-Name</label> <br></br>
         <input type="text" id="recipe-name" name="recipeName" /> <br></br>
@@ -65,8 +72,8 @@ export default function AddRecipe() {
         <label htmlFor="imgr">Img_url</label>
         <br></br>
         <input type="text" id="img" name="img" /> <br></br>
-        <h3>Category</h3>
-        <div className="add_recipe_category">
+        <h3 className="add_recipe_form_category_heading">Category</h3>
+        <div className="add_recipe_form_category">
           <div>
             <input type="checkbox" id="breakfast" name="breakfast" />
             <label htmlFor="breakfast">Breakfast</label>
@@ -84,10 +91,11 @@ export default function AddRecipe() {
 
           <div>
             <input type="checkbox" id="dessert" name="dessert" />
-            <label htmlFor="dessert">Dinner</label>
+            <label htmlFor="dessert">Dessert</label>
           </div>
         </div>
         <button type="submit">Save</button>
+        <button onClick={cancelHandler}>Cancel</button>
       </form>
     </>
   );

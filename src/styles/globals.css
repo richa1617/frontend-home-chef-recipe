@@ -326,13 +326,19 @@ input[type="search"]::placeholder {
 .add-recipe-hero-img {
   background-image: url("/bg-new-edit-recipe-hero.png");
   width: 100vw;
-  height: 60vh;
+  height: 80vh;
   background-size: cover;
-  background-position: center;
-  position: relative;
-  z-index: -1;
+  background-position: left;
+  /* position: relative;
+  z-index: -1; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.add-recipe-hero-img h1 {
+  font-size: 80px;
+}
 .add_recipe_form {
   /* border: 1px solid black; */
   width: 50vw;
@@ -391,9 +397,43 @@ textarea:focus {
   outline: none !important;
 }
 
+.add_recipe_form_category_heading {
+  margin-bottom: 20px;
+}
 .add_recipe_form_category {
   display: flex;
   justify-content: space-between;
+}
+
+.add_recipe_form_category label {
+  margin: 5px;
+  font-size: 13px;
+  position: relative;
+  top: -2px;
+}
+
+.add_recipe_form_category input[type="checkbox"] {
+  accent-color: #febd2f;
+  width: 15px;
+  height: 15px;
+}
+
+.add_recipe_form button {
+  background-color: #febd2f;
+  border-radius: 30px;
+  border: none;
+  padding: 10px;
+  width: 20%;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  margin-top: 20px;
+  margin-left: 20px;
+  transition: 0.3s;
+}
+
+.add_recipe_form button:hover {
+  outline: 1px solid black;
 }
 /* styling : login page */
 .login-bg-img {
@@ -454,6 +494,7 @@ textarea:focus {
   background-color: #febd2f;
   border-radius: 30px;
   border: none;
+  margin-right: 20px;
   padding: 10px;
   width: 40%;
   cursor: pointer;
