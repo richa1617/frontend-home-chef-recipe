@@ -95,8 +95,7 @@ function RecipeList() {
     "⭐️",
     "⭐️ ⭐️",
     "⭐️ ⭐️ ⭐️",
-    "⭐️ ⭐️ ⭐️",
-    " ⭐️ ⭐️ ⭐️ ⭐️",
+    "⭐️ ⭐️ ⭐️ ⭐️",
     "⭐️ ⭐️ ⭐️ ⭐️ ⭐️",
   ];
 
@@ -147,7 +146,8 @@ function RecipeList() {
               ></div>
               <div className="recipe_container_right">
                 <h2>{recipe.name}</h2>
-                <p>
+
+                <h1>
                   {
                     starIcon[
                       recipe.comment.length == 0
@@ -157,7 +157,7 @@ function RecipeList() {
                             .reduce((a, b) => a + b) / recipe.comment.length
                     ]
                   }
-                </p>
+                </h1>
                 <div className="recipe_bottom">
                   <p>
                     <span className="recipe_bottom_heading">Serves</span>{" "}

@@ -24,9 +24,13 @@ export default function Home() {
       <Hero />
 
       <Recipe />
-      <button>
-        <a href="/add-recipe">Add Recipe</a>
-      </button>
+      <div className="add_recipe_button">
+        <div className="add_recipe_text">
+          <a href="/add-recipe">
+            Add <br></br>New <br></br> Recipe
+          </a>
+        </div>
+      </div>
     </>
   );
 }
