@@ -136,33 +136,32 @@
   margin-top: auto;
 }
 
-.recipeHero {
-  border: 5px solid rgb(167, 37, 37);
-  display: flex;
-  width: 100vw;
-  height: 70vh;
-  flex-direction: column;
-  justify-content: center;
-  flex-shrink: 0;
-  background-size: cover;
-  background-position: center;
+.navbarDetailPage {
+  background-color: #febd2f;
+  padding: 30px;
+  margin-top: -30px;
+  border-radius: 30px;
+  position: relative;
+  z-index: 8;
 }
 
-.blackOpacity {
-  position: absolute;
-
+.recipeHero {
+  display: flex;
+  position: relative;
+  background-repeat: no-repeat;
   width: 100vw;
-  height: 70vh;
-  left: 0px;
-  top: 0px;
-  height: 70vh;
-  background-color: black;
-  opacity: 0.2;
-  z-index: 9;
+  height: 50vh;
+  flex-direction: column;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  border-radius: 30px;
+  margin-top: -50px;
+  z-index: 7;
 }
 
 .recipeH1 {
-  border: 5px solid black;
   color: white;
   text-align: center;
   font-size: 96px;
@@ -170,33 +169,77 @@
   font-weight: 400;
   line-height: normal;
   z-index: 11;
+  position: relative;
+}
+
+.blackOpacity {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 70vh;
+  background-color: black;
+  opacity: 0.2;
+  z-index: 9;
 }
 
 .recipeHero span {
   text-align: center;
   font-size: 20px;
+  color: #fff;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  z-index: 11;
+}
+
+.recipeContainer {
+  margin-top: -50px;
+  padding: 15px;
+  position: relative;
+  position: flex;
+  justify-content: center;
+  z-index: 10;
+  width: 90vw;
+  height: 50vh;
+  border-radius: 30px;
+  background: #fff;
+  box-shadow: 0px 7px 24px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 30px;
+  margin-left: 5vw;
 }
 
 .recipeContainerHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: lightgrey dashed;
+  padding: 10px;
 }
+
 .recipeContainerHeaderRightPart {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.recipeContainer {
-  margin: auto;
-  width: 70vw;
-  height: 50vh;
-  flex-shrink: 0;
-  border-radius: 30px;
-  background: #fff;
-  box-shadow: 0px 7px 24px 0px rgba(0, 0, 0, 0.1);
+.recipeContainerBody {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.containerInstructions {
+  width: 50%;
+}
+
+.containerIngredients {
+  width: 50%;
+}
+
+.addCommentForm {
+  width: 50vw;
+  margin-left: 25vw;
+  border: solid black 1px;
 }
