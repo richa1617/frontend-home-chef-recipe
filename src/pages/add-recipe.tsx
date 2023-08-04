@@ -16,6 +16,12 @@ import axios from "axios";
 export default function AddRecipe() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  useEffect(() => {
+    const tokenFromLS = localStorage.getItem("token");
+    if (!tokenFromLS) {
+      router.push("/login");
+    }
+  }, []);
 
   //function to handle submit
 
