@@ -13,7 +13,17 @@ interface Recipe {
   prep_time: number;
   serves: number;
   userId: number;
-  category: Category;
+  category: Category[];
+  comment: Comment[];
+}
+
+interface Comment {
+  id: number;
+  name: string;
+  rating: number;
+  message: string;
+  created_at: string;
+  recipeId: number;
 }
 
 interface Category {
@@ -48,8 +58,11 @@ const RecipesPage = () => {
     // If recipe is still null, this means we are waiting for the request to complete (loading)
     return <div>Loading ...</div>;
   }
+
   const servesAsString = String(recipe.serves);
   const prepTimeAsString = String(recipe.prep_time);
+  const recipeCategories = recipe.category;
+  // const commentsFromRecipe = Recipe.comment.map(recipe) =>
   return (
     <>
       <div className="recipeDetailsPage">
@@ -66,7 +79,11 @@ const RecipesPage = () => {
           >
             <h1 className="recipeH1">{recipe.name}</h1>
             {/* <h3>{recipe.category.name}</h3> */}
-            <span>Placeholder for Recipe Categories</span>
+            <div className="categoryH2">
+              {recipe.category.map((c) => {
+                return <h2>{c.name}</h2>;
+              })}
+            </div>
             <span>Placeholder for Star Rating</span>
             <span>⭐️⭐️⭐️⭐️⭐️(hardcoded)</span>
             <div className="blackOpacity"></div>
@@ -106,18 +123,16 @@ const RecipesPage = () => {
         <div className="CommentsSection">
           <h1>Comments</h1>
           <div className="commentsGrid">
-            <div className="commentOne">
-              <h3>User Name</h3>
-              <p>Date of comment</p>
-              <p>Comment Content</p>
-              <p>Star Rating</p>
-            </div>
-            <div className="commentTwo">
-              <h3>User Name</h3>
-              <p>Date of comment</p>
-              <p>Comment Content</p>
-              <p>Star Rating</p>
-            </div>
+            {recipe.comment.map((comment) => {
+              return (
+                <div className="commentOne">
+                  <h3>{comment.name}</h3>
+                  <p>{comment.created_at}</p>
+                  <p>{comment.message}</p>
+                  <p>{comment.rating}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
