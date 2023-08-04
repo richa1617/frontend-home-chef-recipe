@@ -43,7 +43,7 @@ export default function AddRecipe() {
         };
       });
 
-    console.log(arrayCategoryChecked);
+    // console.log(arrayCategoryChecked);
 
     const formData = {
       name: event.currentTarget.recipeName.value,
