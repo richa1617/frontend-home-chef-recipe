@@ -35,6 +35,9 @@ const NavigationBar = () => {
           ) : (
             <button onClick={handleLogout}>Log Out</button>
           )}
+          <button>
+            <a href="/dashboard">Dashboard</a>
+          </button>
         </div>
       </ul>
     </nav>
