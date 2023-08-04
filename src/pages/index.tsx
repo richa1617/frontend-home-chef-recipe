@@ -2,9 +2,20 @@ import Head from "next/head";
 
 import NavigationBar from "@/components/NavigationBar";
 import Hero from "@/components/Hero";
-import Recipe from "@/components/recipe";
+import RecipeList, { Recipe } from "@/components/recipe";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Dashboard from "./dashboard";
 
 export default function Home() {
+  const [recipes, setRecipes] = useState<null | Recipe[]>(null);
+  useEffect(() => {
+    const fetchRecipeData = async () => {
+      const response = await axios.get("http://localhost:3000/recipe");
+      setRecipes(response.data);
+    };
+    fetchRecipeData();
+  }, []);
   return (
     <>
       <Head>
@@ -23,7 +34,7 @@ export default function Home() {
       <NavigationBar />
       <Hero />
 
-      <Recipe />
+      {recipes && <RecipeList recipes={recipes} />}
       <div className="add_recipe_button">
         <div className="add_recipe_text">
           <a href="/add-recipe">

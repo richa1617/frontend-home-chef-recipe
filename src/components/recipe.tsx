@@ -17,7 +17,7 @@ interface Comment {
   recipeId: number;
 }
 
-interface Recipe {
+export interface Recipe {
   id: number;
   name: string;
   img_url: string;
@@ -30,20 +30,15 @@ interface Recipe {
   comment: Comment[];
 }
 
-function RecipeList() {
+interface RecipeListProps {
+  recipes: Recipe[];
+}
+
+function RecipeList(props: RecipeListProps) {
   const router = useRouter();
-  const [recipes, setRecipes] = useState<null | Recipe[]>(null);
+  const recipes = props.recipes;
+
   const [activeCategory, setActiveCategory] = useState<null | string>(null);
-
-  // state: active filter
-
-  useEffect(() => {
-    const fetchRecipeData = async () => {
-      const response = await axios.get("http://localhost:3000/recipe");
-      setRecipes(response.data);
-    };
-    fetchRecipeData();
-  }, []);
 
   if (recipes === null) {
     return <p>Loading</p>;
@@ -153,7 +148,7 @@ function RecipeList() {
                       recipe.comment.length == 0
                         ? 0
                         : recipe.comment
-                            .map((c) => c.rating)
+                            .map((c) => c.rating) // [4.5]
                             .reduce((a, b) => a + b) / recipe.comment.length
                     ]
                   }
