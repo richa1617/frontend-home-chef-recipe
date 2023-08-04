@@ -52,56 +52,74 @@ const RecipesPage = () => {
   const prepTimeAsString = String(recipe.prep_time);
   return (
     <>
-      <div className="navbarDetailPage">
-        <NavigationBar />
-      </div>
-      <div className="recipeHeroAndBody">
-        <div
-          className="recipeHero"
-          style={{
-            backgroundImage: `url(${recipe.img_url})`,
-          }}
-          title={`picture of ${recipe.name}`}
-        >
-          <h1 className="recipeH1">{recipe.name}</h1>
-          {/* <h3>{recipe.category.name}</h3> */}
-          <span>Placeholder for Recipe Categories</span>
-          <span>Placeholder for Star Rating</span>
-          <span>⭐️⭐️⭐️⭐️⭐️(hardcoded)</span>
-          <div className="blackOpacity"></div>
+      <div className="recipeDetailsPage">
+        <div className="navbarDetailPage">
+          <NavigationBar />
         </div>
+        <div className="recipeHeroAndBody">
+          <div
+            className="recipeHero"
+            style={{
+              backgroundImage: `url(${recipe.img_url})`,
+            }}
+            title={`picture of ${recipe.name}`}
+          >
+            <h1 className="recipeH1">{recipe.name}</h1>
+            {/* <h3>{recipe.category.name}</h3> */}
+            <span>Placeholder for Recipe Categories</span>
+            <span>Placeholder for Star Rating</span>
+            <span>⭐️⭐️⭐️⭐️⭐️(hardcoded)</span>
+            <div className="blackOpacity"></div>
+          </div>
 
-        <div className="recipeContainer">
-          <div className="recipeContainerHeader">
-            <h2>{recipe.name}</h2>
-            <div className="recipeContainerHeaderRightPart">
-              <h2>Serves {servesAsString}</h2>
-              <h2>Prep Time {prepTimeAsString}</h2>
+          <div className="recipeContainer">
+            <div className="recipeContainerHeader">
+              <h2 id="recipeTitle">{recipe.name}</h2>
+              <div className="servesAndPrepTime">
+                <h2 id="u1">Serves </h2>
+                <h2 id="b1">{servesAsString}</h2>
+
+                <h2 id="u2">Prep Time </h2>
+                <h2 id="b2">{prepTimeAsString}</h2>
+              </div>
+            </div>
+            <div className="recipeContainerBody">
+              <div className="containerInstructions">
+                <h2>Instructions</h2>
+                <p>{recipe.instructions}</p>
+              </div>
+              <div className="containerIngredients">
+                <h2>Ingredients</h2>
+                <p>{recipe.ingredients}</p>
+              </div>
             </div>
           </div>
-          <div className="recipeContainerBody">
-            <div className="containerInstructions">
-              <h2>Instructions</h2>
-              <p>{recipe.instructions}</p>
-            </div>
-            <div className="containerIngredients">
-              <h2>Ingredients</h2>
-              <p>{recipe.ingredients}</p>
-            </div>
-          </div>
         </div>
-      </div>
 
-      <div className="addCommentSection">
-        <div className="addCommentH1">
-          <h1>Add a Comment</h1>
-        </div>
-        <div className="addCommentForm">
+        <div className="addCommentSection">
+          <div className="addCommentH1">
+            <h1>Add a Comment</h1>
+          </div>
+
           <AddCommentForm />
         </div>
-      </div>
-      <div className="previousCommentsSection">
-        <h2>CommentsPlaceholder for user comments</h2>
+        <div className="CommentsSection">
+          <h1>Comments</h1>
+          <div className="commentsGrid">
+            <div className="commentOne">
+              <h3>User Name</h3>
+              <p>Date of comment</p>
+              <p>Comment Content</p>
+              <p>Star Rating</p>
+            </div>
+            <div className="commentTwo">
+              <h3>User Name</h3>
+              <p>Date of comment</p>
+              <p>Comment Content</p>
+              <p>Star Rating</p>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

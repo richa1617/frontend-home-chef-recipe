@@ -195,6 +195,11 @@ input[type="search"]::placeholder {
   font-weight: 700;
 }
 
+.recipeDetailsPage {
+  background-color: #f5f3ef;
+  min-height: 2000px;
+}
+
 .recipeHero {
   display: flex;
   position: relative;
@@ -271,7 +276,24 @@ input[type="search"]::placeholder {
 }
 
 .recipeContainer {
-  margin-top: -50px;
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0px 7px 24px 0px rgba(0, 0, 0, 0.5);
+  padding-top: 100px;
+  padding-bottom: 100px;
+  padding-left: 70px;
+  padding-right: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -40px;
+  max-height: 80vh;
+  max-width: 90vw;
+  z-index: 50;
+  position: relative;
+  /* margin-top: -50px;
   padding: 15px;
   position: relative;
   position: flex;
@@ -283,27 +305,34 @@ input[type="search"]::placeholder {
   background: #fff;
   box-shadow: 0px 7px 24px 0px rgba(0, 0, 0, 0.5);
   border-radius: 30px;
-  margin-left: 5vw;
+  margin-left: 5vw; */
 }
 
 .recipeContainerHeader {
+  grid-column: 5;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border-bottom: lightgrey dashed;
-  padding: 10px;
 }
 
-.recipeContainerHeaderRightPart {
+#recipeTitle {
+  width: 50%;
+}
+
+/*Recipe Container*/
+
+.servesAndPrepTime {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: row;
+  width: 50%;
 }
 
 .recipeContainerBody {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 10px;
 }
 
@@ -315,10 +344,91 @@ input[type="search"]::placeholder {
   width: 50%;
 }
 
+/*Add-Comment Form*/
+
+.addCommentH1 {
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
 .addCommentForm {
-  width: 50vw;
-  margin-left: 25vw;
-  border: solid black 1px;
+  background-color: #fff;
+  width: 80vw;
+  margin-left: 10vw;
+  border-radius: 30px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0px 7px 24px 0px rgba(0, 0, 0, 0.5);
+}
+.addCommentFormTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.commentNameField {
+  display: flex;
+  flex-direction: column;
+}
+
+.commentRatingField {
+  display: flex;
+  flex-direction: column;
+}
+
+.commentReviewField {
+  margin-top: 10px;
+}
+
+.addCommentSaveButton {
+  border-radius: 30px;
+  background-color: #febd2f;
+  border-width: 0;
+  text-align: center;
+  outline: none;
+  padding-right: 50px;
+  width: fit-content;
+  height: 25px;
+}
+
+/* Show User Comments Section */
+
+.CommentsSection h1 {
+  margin-top: 7rem;
+  display: flex;
+  justify-content: center;
+}
+
+.commentsGrid {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5rem;
+  justify-content: space-between;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+.commentOne {
+  background-color: #fff;
+  border-radius: 30px;
+  width: 40vw;
+  height: 20vh;
+  padding: 20px;
+  box-shadow: 0px 7px 24px 0px rgba(0, 0, 0, 0.5);
+  margin-right: 15px;
+}
+
+.commentTwo {
+  background-color: #fff;
+  border-radius: 30px;
+  width: 40vw;
+  height: 20vh;
+  padding: 20px;
+  box-shadow: 0px 7px 24px 0px rgba(0, 0, 0, 0.5);
+  margin-left: 15px;
 }
 
 /* style of 3 page : add new recipe */
