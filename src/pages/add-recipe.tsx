@@ -1,5 +1,7 @@
 import NavigationBar from "@/components/NavigationBar";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 // interface FormData{
 //   recipeName:string;
@@ -12,31 +14,70 @@ import { useRouter } from "next/router";
 // }
 
 export default function AddRecipe() {
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    const recipeName = event.currentTarget.recipeName.value;
-    const instructions = event.currentTarget.instructions.value;
-    const ingredients = event.currentTarget.ingredients.value;
-    const prepTime = event.currentTarget.prepTime.value;
-    const servers = event.currentTarget.servers.value;
-    const img = event.currentTarget.img.value;
-    const breakfastChecked = event.currentTarget.breakfast.checked;
-    const lunchChecked = event.currentTarget.lunch.checked;
-    const dinnerChecked = event.currentTarget.dinner.checked;
-    const dessertChecked = event.currentTarget.dessert.checked;
+  useEffect(() => {
+    const tokenFromLS = localStorage.getItem("token");
+    if (!tokenFromLS) {
+      router.push("/login");
+    }
+  }, []);
 
-    console.log(recipeName);
-    console.log(ingredients);
-    console.log(instructions);
-    console.log(prepTime);
-    console.log(servers);
-    console.log(img);
-    console.log(breakfastChecked);
-    console.log(lunchChecked);
-    console.log(dinnerChecked);
-    console.log(dessertChecked);
+  //function to handle submit
 
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    const categoryChecked = {
+      breakfast: event.currentTarget.breakfast.checked, //true
+      lunch: event.currentTarget.lunch.checked, //false
+      dinner: event.currentTarget.dinner.checked, // true
+      dessert: event.currentTarget.dessert.checked, //faslse
+    };
+
+    const arrayCategoryChecked = Object.entries(categoryChecked)
+      .filter(([key, value]) => value === true)
+      .map(([key]) => {
+        return {
+          name: key,
+        };
+      });
+
+    console.log(arrayCategoryChecked);
+
+    const formData = {
+      name: event.currentTarget.recipeName.value,
+      img_url: event.currentTarget.img.value,
+      instructions: event.currentTarget.instructions.value,
+      ingredients: event.currentTarget.ingredients.value,
+      prep_time: event.currentTarget.prepTime.value,
+      serves: event.currentTarget.servers.value,
+      category: arrayCategoryChecked,
+    };
+
+    const tokenFromLS = localStorage.getItem("token");
+    if (!tokenFromLS) {
+      return;
+    }
+    console.log(tokenFromLS);
+
+    console.log(formData);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/create-recipe",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${tokenFromLS}`,
+          },
+        }
+      );
+      console.log(response);
+      setError(null);
+    } catch (error) {
+      setError("Something went wrong");
+    }
   }
 
   function cancelHandler() {
@@ -100,3 +141,14 @@ export default function AddRecipe() {
     </>
   );
 }
+
+// console.log(recipeName);
+// console.log(ingredients);
+// console.log(instructions);
+// console.log(prepTime);
+// console.log(servers);
+// console.log(img);
+// console.log(breakfastChecked);
+// console.log(lunchChecked);
+// console.log(dinnerChecked);
+// console.log(dessertChecked);

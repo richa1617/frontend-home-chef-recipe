@@ -25,7 +25,7 @@ export default function Login() {
       setError(null);
 
       localStorage.setItem("token", response.data.token);
-      router.push("/");
+      router.push("/dashboard");
     } catch (error) {
       setError("Something went wrong");
     }
