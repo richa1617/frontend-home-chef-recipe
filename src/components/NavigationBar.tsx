@@ -1,7 +1,9 @@
 import Link from "next/link";
+import router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const NavigationBar = () => {
+  const router = useRouter();
   const [token, setToken] = useState<null | string>(null);
   useEffect(() => {
     const tokenFromLS = localStorage.getItem("token");
@@ -10,9 +12,12 @@ const NavigationBar = () => {
     }
   }, []);
 
-  function handleLogout() {
+  function handleLogout(event: React.MouseEvent) {
+    event.preventDefault();
     localStorage.removeItem("token");
     setToken(null);
+
+    router.push("/");
   }
 
   return (
@@ -30,33 +35,46 @@ const NavigationBar = () => {
                 Home
               </Link>
             </li>
-            {!token ? (
-              <li>
-                <Link
-                  href="/login"
-                  className="text-black hover:text-white hover: hover:duration-300 hover:ease-in-out"
-                >
-                  Login
-                </Link>
-              </li>
+
+            {token ? (
+              <>
+                <li>
+                  <Link
+                    href="/dashboard"
+                    className="text-black hover:text-white hover: hover:duration-300 hover:ease-in-out"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    className="text-black hover:text-white hover: hover:duration-300 hover:ease-in-out"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
             ) : (
-              <li>
-                <button
-                  onClick={handleLogout}
-                  className="text-black hover:text-white hover: hover:duration-300 hover:ease-in-out"
-                >
-                  Log Out
-                </button>
-              </li>
+              <>
+                <li>
+                  <Link
+                    href="/login"
+                    className="text-black hover:text-white hover: hover:duration-300 hover:ease-in-out"
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/login"
+                    className="text-black hover:text-white hover: hover:duration-300 hover:ease-in-out"
+                  >
+                    Register
+                  </Link>
+                </li>
+              </>
             )}
-            <li>
-              <Link
-                href="/dashboard"
-                className="text-black hover:text-white hover: hover:duration-300 hover:ease-in-out"
-              >
-                Dashboard
-              </Link>
-            </li>
           </ul>
         </div>
       </section>
@@ -65,3 +83,14 @@ const NavigationBar = () => {
 };
 
 export default NavigationBar;
+
+{
+  /* <li>
+<button
+  onClick={handleLogout}
+  className="text-black hover:text-white hover: hover:duration-300 hover:ease-in-out"
+>
+  Log Out
+</button>
+</li> */
+}

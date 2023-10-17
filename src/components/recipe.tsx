@@ -149,8 +149,10 @@ function RecipeList(props: RecipeListProps) {
                 className="recipe_img w-1/2 rounded-l-lg bg-cover bg-center"
               ></div>
               <div className="recipe_container_right w-1/2 p-5 flex flex-col justify-between">
-                <h2 className="text-3xl font-semibold">{recipe.name}</h2>
-                <h1 className="text-3xl font-semibold">
+                <h2 className="text-2xl font-semibold font-serif">
+                  {recipe.name}
+                </h2>
+                <h1 className="text-xl font-semibold">
                   {
                     starIcon[
                       recipe.comment.length === 0
@@ -162,16 +164,16 @@ function RecipeList(props: RecipeListProps) {
                   }
                 </h1>
                 <div className="recipe_bottom mt-auto flex justify-between">
-                  <p className="recipe_bottom_heading text-gray-500">
+                  <p className="recipe_bottom_heading text-gray-900">
                     Serves <br />
-                    <span className="recipe_bottom_content">
+                    <span className="text-gray-400">
                       {serves[recipe.serves - 1]}
                     </span>
                   </p>
                   <div>|</div>
-                  <p className="recipe_bottom_heading text-gray-500">
+                  <p className="text-gray-900">
                     Prep time <br />
-                    <span className="recipe_bottom_content">
+                    <span className="text-gray-400">
                       {recipe.prep_time} min
                     </span>
                   </p>
