@@ -95,78 +95,70 @@ function RecipeList(props: RecipeListProps) {
   ];
 
   return (
-    <main className="recipe_main">
-      <h1>Recipe</h1>
+    <main className="recipe_main grid grid-cols-10 gap-10 mx-auto max-w-screen-xl mt-20 pl-10 pr-10">
+      <h1 className="col-span-2">Recipe</h1>
       <input
         type="search"
         placeholder="Search For Recipes..."
-        className="recipe_search"
+        className="col-span-8 px-4 py-2 rounded-full border border-gray-300 bg-white bg-no-repeat bg-left-center pl-14"
       ></input>
-      <div className="recipe_button_container">
-        <button
-          className={` recipe_button ${!activeCategory ? "active-button" : ""}`}
-          onClick={() => setActiveCategory(null)}
-        >
-          <span className="button_icons">🍴</span> All
-        </button>
+      <div className="col-span-8 md:col-span-2 border-2 border-solid border-red-200">
         {uniqueCategories.map((category) => {
           return (
             <button
               key={category}
-              className={`recipe_button  
-                ${activeCategory === category ? "active-button" : ""}
-                `}
-              onClick={() => clickHandler(category)}
+              className={`recipe_button w-full py-2 mb-2 border border-gray-300 rounded-full text-left cursor-pointer ${
+                (activeCategory === category && "bg-yellow-400") || ""
+              }`}
+              onClick={() => setActiveCategory(category)}
             >
-              <span className="button_icons">{`${categoryIcons[category]}`}</span>{" "}
+              <span className="button_icons text-center w-10 h-10 border border-gray-300 rounded-full inline-block text-xl">
+                {`${categoryIcons[category]}`}
+              </span>{" "}
               {category}
             </button>
           );
         })}
       </div>
 
-      <div className="recipe_container">
+      <div className="col-span-8 grid grid-cols-8 gap-10">
         {filteredRecipes.map((recipe) => {
           return (
             <section
               key={recipe.id}
               onClick={() => clickHandleForRecipeId(recipe.id)}
-              className="recipe_card"
+              className="col-span-8 md:col-span-4 flex max-w-2xl h-80 rounded-lg bg-white shadow-lg cursor-pointer transform transition-transform hover:translate-y-[-10px] hover:shadow-xl"
             >
               <div
                 style={{
                   backgroundImage: `url(${recipe.img_url})`,
                 }}
-                className="recipe_img"
+                className="recipe_img w-1/2 rounded-l-lg bg-cover bg-center"
               ></div>
-              <div className="recipe_container_right">
-                <h2>{recipe.name}</h2>
-
-                <h1>
+              <div className="recipe_container_right w-1/2 p-5 flex flex-col justify-between">
+                <h2 className="text-3xl font-semibold">{recipe.name}</h2>
+                <h1 className="text-3xl font-semibold">
                   {
                     starIcon[
-                      recipe.comment.length == 0
+                      recipe.comment.length === 0
                         ? 0
                         : recipe.comment
-                            .map((c) => c.rating) // [4.5]
+                            .map((c) => c.rating)
                             .reduce((a, b) => a + b) / recipe.comment.length
                     ]
                   }
                 </h1>
-                <div className="recipe_bottom">
-                  <p>
-                    <span className="recipe_bottom_heading">Serves</span>{" "}
-                    <br></br>
-                    <span className="recipe_bottom_content">{`${
-                      serves[recipe.serves - 1]
-                    }`}</span>
+                <div className="recipe_bottom mt-auto flex justify-between">
+                  <p className="recipe_bottom_heading text-gray-500">
+                    Serves <br />
+                    <span className="recipe_bottom_content">
+                      {serves[recipe.serves - 1]}
+                    </span>
                   </p>
                   <div>|</div>
-                  <p>
-                    <span className="recipe_bottom_heading">Prep time</span>{" "}
-                    <br></br>
+                  <p className="recipe_bottom_heading text-gray-500">
+                    Prep time <br />
                     <span className="recipe_bottom_content">
-                      {" "}
                       {recipe.prep_time} min
                     </span>
                   </p>

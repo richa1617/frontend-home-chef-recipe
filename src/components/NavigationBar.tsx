@@ -15,31 +15,38 @@ const NavigationBar = () => {
   }
 
   return (
-    <nav className="navbar">
-      <ul className="navbar_list">
-        <li>
-          <p>🥘 HomeChefRecipes</p>
-        </li>
-        <div className="navbar_list_right">
+    <nav className="bg-[ #febd2f] p-4">
+      <div className="container mx-auto flex justify-between items-center">
+        <p className="text-black text-2xl">🥘 HomeChefRecipes</p>
+        <ul className="flex space-x-4">
           <li>
-            <button>
-              <a href="/">Home</a>
-            </button>
+            <a href="/" className="text-black hover:text-gray-300">
+              Home
+            </a>
           </li>
           {!token ? (
-            <button>
-              <li>
-                <a href="/login">Login</a>
-              </li>
-            </button>
+            <li>
+              <a href="/login" className="text-black hover:text-gray-300">
+                Login
+              </a>
+            </li>
           ) : (
-            <button onClick={handleLogout}>Log Out</button>
+            <li>
+              <button
+                onClick={handleLogout}
+                className="text-black hover:text-gray-300"
+              >
+                Log Out
+              </button>
+            </li>
           )}
-          <button>
-            <a href="/dashboard">Dashboard</a>
-          </button>
-        </div>
-      </ul>
+          <li>
+            <a href="/dashboard" className="text-black hover:text-gray-300">
+              Dashboard
+            </a>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 };
