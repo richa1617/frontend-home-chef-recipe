@@ -67,7 +67,7 @@ const NavigationBar = () => {
                 </li>
                 <li>
                   <Link
-                    href="/login"
+                    href="/register"
                     className="text-black hover:text-white hover: hover:duration-300 hover:ease-in-out"
                   >
                     Register
