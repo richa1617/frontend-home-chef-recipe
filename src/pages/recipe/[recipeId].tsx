@@ -66,38 +66,42 @@ const RecipesPage = () => {
   return (
     <>
       <div className="recipeDetailsPage bg-[#f5f3ef] min-h-screen">
-        <div className="navbarDetailPage bg-[#febd2f] p-3 rounded-t-lg relative z-10">
+        <div className="navbarDetailPage bg-[#febd2f] rounded-t-lg relative z-10">
           <NavigationBar />
         </div>
         <div
-          className="recipeHero h-[60vh] w-full relative bg-cover bg-center bg-no-repeatborder-2 border-red-300 border-solid flex justify-center flex-col overflow-hidden -mt-10 rounded-3xl"
-          style={{
-            backgroundImage: `url(${recipe.img_url})`,
-          }}
+          className="recipeHero h-[60vh] w-full relative bg-cover bg-center bg-no-repeat flex flex-col justify-center overflow-hidden -mt-10 rounded-3xl"
+          style={{ backgroundImage: `url(${recipe.img_url})` }}
           title={`picture of ${recipe.name}`}
         >
           <div className="absolute inset-0 bg-black opacity-20 rounded-lg"></div>
           <h1 className="recipeH1 text-white text-center text-5xl font-semibold relative z-20">
             {recipe.name}
           </h1>
-          <div className="categoryH2 text-white text-center relative z-20">
-            {recipe.category.map((c) => {
+          <div className="categoryH2 text-white text-center z-20 border-2 border-solid border-red-500">
+            {recipe.category.map((c, index) => {
+              const categoryName =
+                index !== 0
+                  ? "-" + c.name
+                  : c.name.charAt(0).toUpperCase() + c.name.slice(1);
+
               return (
-                <h2 className="text-2xl" key={c.name}>
-                  {c.name}
-                </h2>
+                <span
+                  className={`text-base ${index !== 0 ? "ml-1" : ""}`}
+                  key={c.name}
+                >
+                  {categoryName}
+                </span>
               );
             })}
           </div>
-          <span className="text-white text-center text-xl absolute bottom-5 left-1/2 transform -translate-x-1/2">
-            Placeholder for Star Rating
-          </span>
-          <span className="text-white text-center text-xl absolute bottom-0 left-1/2 transform -translate-x-1/2">
-            ⭐️⭐️⭐️⭐️⭐️(hardcoded)
-          </span>
+
+          <div className="text-white text-center text-xl z-20 ">
+            ⭐️⭐️⭐️⭐️⭐️
+          </div>
         </div>
 
-        <div className="recipeContainer w-[70%] mx-auto bg-white rounded-b-lg shadow-lg z-10 mt-10 p-10 border-2 border-green-500 border-solid flex flex-col h-[50vh]">
+        <div className="recipeContainer w-[70%] mx-auto bg-white rounded-lg shadow-lg relative z-100 -mt-10 p-10 border-2 flex flex-col h-[50vh] -mt-20px ">
           <div className="recipeContainerHeader flex justify-between border-b border-gray-300 pb-4 mb-4">
             <h2 id="recipeTitle" className="text-xl font-semibold">
               {recipe.name}
@@ -121,7 +125,7 @@ const RecipesPage = () => {
               </div>
             </div>
           </div>
-          <div className="recipeContainerBody flex border-2 border-solid border-red-400">
+          <div className="recipeContainerBody flex">
             <div className="w-full md:w-1/2">
               <h2 className="text-xl font-semibold">Instructions</h2>
               <p className="text-xs">{recipe.instructions}</p>
