@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const NavigationBar = () => {
@@ -15,38 +16,50 @@ const NavigationBar = () => {
   }
 
   return (
-    <nav className="bg-[ #febd2f] p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <p className="text-black text-2xl">🥘 HomeChefRecipes</p>
-        <ul className="flex space-x-4">
-          <li>
-            <a href="/" className="text-black hover:text-gray-300">
-              Home
-            </a>
-          </li>
-          {!token ? (
+    <nav className="bg-[#febd2f] py-4">
+      <section className="w-[95vw] mx-auto">
+        {" "}
+        <div className="mx-auto flex justify-between items-center">
+          <p className="text-black text-xs md:text-lg">🥘 HomeChefRecipes</p>
+          <ul className="flex space-x-4">
             <li>
-              <a href="/login" className="text-black hover:text-gray-300">
-                Login
-              </a>
-            </li>
-          ) : (
-            <li>
-              <button
-                onClick={handleLogout}
-                className="text-black hover:text-gray-300"
+              <Link
+                href="/"
+                className="text-black hover:text-white hover: hover:duration-300 hover:ease-in-out"
               >
-                Log Out
-              </button>
+                Home
+              </Link>
             </li>
-          )}
-          <li>
-            <a href="/dashboard" className="text-black hover:text-gray-300">
-              Dashboard
-            </a>
-          </li>
-        </ul>
-      </div>
+            {!token ? (
+              <li>
+                <Link
+                  href="/login"
+                  className="text-black hover:text-white hover: hover:duration-300 hover:ease-in-out"
+                >
+                  Login
+                </Link>
+              </li>
+            ) : (
+              <li>
+                <button
+                  onClick={handleLogout}
+                  className="text-black hover:text-white hover: hover:duration-300 hover:ease-in-out"
+                >
+                  Log Out
+                </button>
+              </li>
+            )}
+            <li>
+              <Link
+                href="/dashboard"
+                className="text-black hover:text-white hover: hover:duration-300 hover:ease-in-out"
+              >
+                Dashboard
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </section>
     </nav>
   );
 };

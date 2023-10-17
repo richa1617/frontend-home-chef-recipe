@@ -102,23 +102,36 @@ function RecipeList(props: RecipeListProps) {
         placeholder="Search For Recipes..."
         className="col-span-8 px-4 py-2 rounded-full border border-gray-300 bg-white bg-no-repeat bg-left-center pl-14"
       ></input>
-      <div className="col-span-8 md:col-span-2 border-2 border-solid border-red-200">
-        {uniqueCategories.map((category) => {
-          return (
-            <button
-              key={category}
-              className={`recipe_button w-full py-2 mb-2 border border-gray-300 rounded-full text-left cursor-pointer ${
-                (activeCategory === category && "bg-yellow-400") || ""
-              }`}
-              onClick={() => setActiveCategory(category)}
-            >
-              <span className="button_icons text-center w-10 h-10 border border-gray-300 rounded-full inline-block text-xl">
-                {`${categoryIcons[category]}`}
-              </span>{" "}
-              {category}
-            </button>
-          );
-        })}
+      <div className="col-span-8 md:col-span-2 ">
+        <div>
+          <button
+            className={`recipe_button w-full py-2 mb-2 border border-gray-300 rounded-full text-left cursor-pointer ${
+              !activeCategory ? "bg-yellow-400" : ""
+            }`}
+            onClick={() => setActiveCategory(null)}
+          >
+            <span className="button_icons text-center w-10 h-10 border border-gray-300 rounded-full inline-block text-xl">
+              🍴
+            </span>{" "}
+            All
+          </button>
+          {uniqueCategories.map((category) => {
+            return (
+              <button
+                key={category}
+                className={`recipe_button w-full py-2 mb-2 border border-gray-300 rounded-full text-left cursor-pointer ${
+                  (activeCategory === category && "bg-yellow-400") || ""
+                }`}
+                onClick={() => setActiveCategory(category)}
+              >
+                <span className="button_icons text-center w-10 h-10 border border-gray-300 rounded-full inline-block text-xl">
+                  {`${categoryIcons[category]}`}
+                </span>{" "}
+                {category}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       <div className="col-span-8 grid grid-cols-8 gap-10">
