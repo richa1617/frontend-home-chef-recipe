@@ -35,22 +35,43 @@ const AddCommentForm = () => {
   };
   return (
     <>
-      <form onSubmit={handleSubmit} action="" className="addCommentForm">
-        <div className="addCommentFormTop">
-          <div className="commentNameField">
+      <form
+        onSubmit={handleSubmit}
+        action=""
+        className="bg-white w-[40vw] h-[50vh] ml-10vw rounded-3xl p-8 flex flex-col justify-between shadow-lg mx-auto"
+      >
+        <div className="flex justify-between">
+          <div className="flex flex-col">
             <label htmlFor="name">Name</label>
-            <input name="commenterName" id="name" type="text" />
+            <input
+              name="commenterName"
+              id="name"
+              type="text"
+              className="border border-gray-300 p-2 rounded"
+            />
           </div>
-          <div className="commentRatingField">
+          <div className="flex flex-col">
             <label htmlFor="rating">Rating</label>
-            <input name="rating" id="rating" type="number" />
+            <input
+              name="rating"
+              id="rating"
+              type="number"
+              className="border border-gray-300 p-2 rounded"
+            />
           </div>
         </div>
-        <div className="commentReviewField">
+        <div className="mt-2 flex flex-col">
           <label htmlFor="message">Review</label>
-          <textarea name="message" id="message" />
+          <textarea
+            name="message"
+            id="message"
+            className="border border-gray-300 p-2 rounded"
+          />
         </div>
-        <button className="addCommentSaveButton" type="submit">
+        <button
+          className="rounded-3xl bg-yellow-500 border-0 text-white text-center outline-none py-2 px-8 mt-4"
+          type="submit"
+        >
           Save
         </button>
       </form>
