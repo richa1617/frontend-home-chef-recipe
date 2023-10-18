@@ -1,11 +1,16 @@
-function Hero() {
-  return (
-    <div className="hero">
-      <h1 className="hero_title">
-        Home <br></br> Chef <br></br> Recipe <br></br>
-      </h1>
-    </div>
-  );
-}
+// function Hero() {
+//   const backgroundImageUrl = "/bg-homepage-hero.png";
 
-export default Hero;
+//   return (
+//     <div
+//       className="h-[70vh] rounded-b-[50px] bg-cover bg-left bg-no-repeat "
+//       style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+//     >
+//       <h1 className="hero_title text-6xl ml-10">
+//         Home <br /> Chef <br /> Recipe <br />
+//       </h1>
+//     </div>
+//   );
+// }
+
+// export default Hero;

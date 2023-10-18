@@ -31,19 +31,41 @@ export default function Login() {
     }
   }
   return (
-    <div className="login-bg-img">
+    <div className="bg-[url('/bg-login.png')] bg-center bg-cover h-screen">
       <NavigationBar />
 
-      <form onSubmit={handleSubmit} className="login_form">
-        <h1>LOGIN</h1>
-        <label htmlFor="username">Username</label> <br></br>
-        <input type="text" id="username" name="userName" /> <br></br>
-        <label htmlFor="password">Password</label> <br></br>
-        <input type="password" id="password" name="userPassword" /> <br></br>
-        <button type="submit" className="login_form_btn">
+      <form
+        onSubmit={handleSubmit}
+        className="login_form p-10 mx-auto mt-10 bg-white rounded-lg shadow-lg w-80 md:w-96"
+      >
+        <h1 className="text-3xl font-semibold mb-5 text-center">LOGIN</h1>
+        <label htmlFor="username" className="text-base font-semibold">
+          Username
+        </label>
+        <br />
+        <input
+          type="text"
+          id="username"
+          name="userName"
+          className="w-full border border-gray-300 rounded-lg py-2 px-3 mb-4"
+        />
+        <label htmlFor="password" className="text-base font-semibold">
+          Password
+        </label>
+        <br />
+        <input
+          type="password"
+          id="password"
+          name="userPassword"
+          className="w-full border border-gray-300 rounded-lg py-2 px-3 mb-4"
+        />
+        <button
+          type="submit"
+          className="login_form_btn bg-[#febd2f] text-white rounded-lg py-2 px-4 font-medium hover:bg-[#febd2f] hover:outline-none transition duration-300 ease-in-out"
+        >
           Login
         </button>
-        {error ? <p>Something went wrong</p> : ""}
+        {error ? <p className="text-red-500 mt-2">Something went wrong</p> : ""}
       </form>
     </div>
   );
