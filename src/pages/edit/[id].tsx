@@ -1,7 +1,26 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import NavigationBar from "@/components/NavigationBar";
+import { z } from "zod";
+
+const formData = z.object({
+  name: z.string(),
+  instructions: z.string(),
+  ingredients: z.string(),
+  prep_time: z.number(),
+  serves: z.number(),
+  img_url: z.string(),
+
+  breakfast: z.boolean(),
+  lunch: z.boolean(),
+  dinner: z.boolean(),
+  dessert: z.boolean(),
+});
+
+type DataFromForm = z.infer<typeof formData>;
 
 interface Recipe {
   id: number;
@@ -19,20 +38,21 @@ interface Category {
   id: number;
   name: string;
 }
+
 function Edit() {
   const router = useRouter();
   let id = Number(router.query.id);
 
   const [item, setItem] = useState<Recipe | null>(null);
-  console.log(id);
+
   useEffect(() => {
     if (id === undefined) {
       return;
     }
-
     const fetchItem = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/edit/${id}`);
+        console.log(response.data);
         setItem(response.data);
       } catch (error) {
         console.error("Error fetching item:", error);
@@ -42,11 +62,31 @@ function Edit() {
     fetchItem();
   }, [id]);
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<DataFromForm>({
+    resolver: zodResolver(formData),
+  });
+
+  async function handleFormSubmit(data: DataFromForm) {
+    console.log("clicked");
+    console.log(data);
+    try {
+      const id = Number(router.query.id); //
+      const response = await axios.patch(
+        `http://localhost:3000/edit/${id}`,
+        data
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function cancelHandler() {
+    console.log("cancel");
     router.push("/");
   }
 
@@ -61,24 +101,24 @@ function Edit() {
       </div>
       <h1>{id}</h1>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(handleFormSubmit)}
         className="add_recipe_form w-full md:w-[50vw] -mt-20 mb-10 mx-auto p-8 rounded-lg shadow-xl bg-white"
       >
         <label htmlFor="recipe-name">Recipe Name</label>
         <br />
         <input
           type="text"
-          id="recipe-name"
-          name="recipeName"
-          value={item.name}
+          id="name"
+          defaultValue={item.name}
           className="w-full max-w-full mb-5 mt-2 p-3 border-2 border-solid border-gray-300 rounded-md"
+          {...register("name")}
         />
         <label htmlFor="instructions">Instructions</label>
         <br />
         <textarea
-          id="instruction"
-          name="instructions"
-          value={item.instructions}
+          id="instructions"
+          {...register("instructions")}
+          defaultValue={item.instructions}
           rows={8}
           className="w-full max-w-full mb-5 p-3 border-2 border-solid border-gray-300 rounded-md"
         ></textarea>
@@ -86,11 +126,12 @@ function Edit() {
         <br />
         <textarea
           id="ingredients"
-          name="ingredients"
-          value={item.ingredients}
+          {...register("ingredients")}
+          defaultValue={item.ingredients}
           rows={5}
           className="w-full max-w-full mb-5 p-3 border-2 border-solid border-gray-300 rounded-md"
         ></textarea>
+
         <div className="mb-4 flex flex-col md:flex-row">
           <div className="add_recipe_form_prep w-full md:w-3/5 pr-4 mb-4 md:mb-0">
             <label htmlFor="prep_time">Prep Time</label>
@@ -98,8 +139,8 @@ function Edit() {
             <input
               type="number"
               id="prep_time"
-              name="prepTime"
-              value={item.prep_time}
+              {...register("prep_time", { valueAsNumber: true })}
+              defaultValue={item.prep_time}
               className="w-full p-2 border-2 border-solid border-gray-300 rounded-md"
             />
           </div>
@@ -110,20 +151,20 @@ function Edit() {
             <input
               type="number"
               id="serves"
-              name="servers"
-              value={item.serves}
+              {...register("serves", { valueAsNumber: true })}
+              defaultValue={item.serves}
               className="w-full p-2 border-2 border-solid border-gray-300 rounded-md"
             />
           </div>
         </div>
 
-        <label htmlFor="img">Img URL</label>
+        <label htmlFor="img_url">Img URL</label>
         <br />
         <input
           type="text"
-          id="img"
-          name="img"
-          value={item.img_url}
+          id="img_url"
+          {...register("img_url")}
+          defaultValue={item.img_url}
           className="w-full max-w-full mb-5 p-3 border-2 border-solid border-gray-300 rounded-md"
         />
         <h3 className="add_recipe_form_category_heading mb-4">Category</h3>
@@ -132,13 +173,9 @@ function Edit() {
             <input
               type="checkbox"
               id="breakfast"
-              name="breakfast"
+              defaultChecked={item.category.some((c) => c.name === "breakfast")}
+              {...register("breakfast")}
               className="mr-2 h-4 w-4 text-[#febd2f]"
-              checked={
-                item?.category?.some(
-                  (cat) => cat.name.toLowerCase() === "breakfast"
-                ) || false
-              }
             />
             <label htmlFor="breakfast" className="">
               Breakfast
@@ -148,7 +185,8 @@ function Edit() {
             <input
               type="checkbox"
               id="lunch"
-              name="lunch"
+              defaultChecked={item.category.some((c) => c.name === "lunch")}
+              {...register("lunch")}
               className="mr-2 h-4 w-4 text-[#febd2f]"
             />
             <label htmlFor="lunch">Lunch</label>
@@ -157,13 +195,9 @@ function Edit() {
             <input
               type="checkbox"
               id="dinner"
-              name="dinner"
+              defaultChecked={item.category.some((c) => c.name === "dinner")}
+              {...register("dinner")}
               className="mr-2 h-4 w-4 text-[#febd2f]"
-              checked={
-                item?.category?.some(
-                  (cat) => cat.name.toLowerCase() === "dinner"
-                ) || false
-              }
             />
             <label htmlFor="dinner">Dinner</label>
           </div>
@@ -172,13 +206,9 @@ function Edit() {
             <input
               type="checkbox"
               id="dessert"
-              name="dessert"
+              defaultChecked={item.category.some((c) => c.name === "dessert")}
+              {...register("dessert")}
               className="mr-2 h-4 w-4 text-[#febd2f]"
-              checked={
-                item?.category?.some(
-                  (cat) => cat.name.toLowerCase() === "dessert"
-                ) || false
-              }
             />
             <label htmlFor="dessert">Dessert</label>
           </div>
@@ -187,7 +217,7 @@ function Edit() {
           type="submit"
           className="bg-[#febd2f] rounded-full py-2 px-6 text-white text-lg font-semibold hover:outline-black hover:border-2 hover:border-solid hover:border-black mt-4 ml-4 transition duration-300"
         >
-          Save
+          Save Changes
         </button>
         <button
           onClick={cancelHandler}
