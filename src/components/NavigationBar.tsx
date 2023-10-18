@@ -21,7 +21,7 @@ const NavigationBar = () => {
   }
 
   return (
-    <nav className="bg-[#febd2f] py-4">
+    <nav className="bg-[#febd2f] py-4 w-full">
       <section className="w-[95vw] mx-auto">
         {" "}
         <div className="mx-auto flex justify-between items-center">

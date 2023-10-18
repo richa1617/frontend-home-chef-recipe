@@ -62,23 +62,23 @@ const RecipesPage = () => {
   const servesAsString = String(recipe.serves);
   const prepTimeAsString = String(recipe.prep_time);
   const recipeCategories = recipe.category;
-  // const commentsFromRecipe = Recipe.comment.map(recipe) =>
+
   return (
     <>
-      <div className="recipeDetailsPage bg-[#f5f3ef] min-h-screen">
-        <div className="navbarDetailPage bg-[#febd2f] rounded-t-lg relative z-10">
+      <div className="w-full min-h-screen">
+        <div className=" bg-[#febd2f] relative z-10 w-full">
           <NavigationBar />
         </div>
         <div
-          className="recipeHero h-[60vh] w-full relative bg-cover bg-center bg-no-repeat flex flex-col justify-center overflow-hidden -mt-10 rounded-3xl"
+          className="h-[60vh] w-full relative bg-cover bg-center bg-no-repeat flex flex-col justify-center overflow-hidden -mt-10 rounded-3xl"
           style={{ backgroundImage: `url(${recipe.img_url})` }}
           title={`picture of ${recipe.name}`}
         >
           <div className="absolute inset-0 bg-black opacity-20 rounded-lg"></div>
-          <h1 className="recipeH1 text-white text-center text-5xl font-semibold relative z-20">
+          <h1 className=" text-white text-center text-5xl font-semibold relative z-20">
             {recipe.name}
           </h1>
-          <div className="categoryH2 text-white text-center z-20 border-2 border-solid border-red-500">
+          <div className=" text-white text-center z-20 ">
             {recipe.category.map((c, index) => {
               const categoryName =
                 index !== 0
@@ -101,12 +101,12 @@ const RecipesPage = () => {
           </div>
         </div>
 
-        <div className="recipeContainer w-[70%] mx-auto bg-white rounded-lg shadow-lg relative z-100 -mt-10 p-10 border-2 flex flex-col h-[50vh] -mt-20px ">
-          <div className="recipeContainerHeader flex justify-between border-b border-gray-300 pb-4 mb-4">
+        <div className="w-full md:w-[70%] mx-auto bg-white rounded-lg shadow-lg relative z-100 -mt-10 p-10 border-2 flex flex-col h-[50vh] -mt-20px ">
+          <div className=" flex justify-between border-b border-gray-300 pb-4 mb-4">
             <h2 id="recipeTitle" className="text-xl font-semibold">
               {recipe.name}
             </h2>
-            <div className="servesAndPrepTime flex">
+            <div className=" flex ">
               <div className="text-gray-500 mr-4">
                 <h2 id="u1" className="font-semibold">
                   Serves
@@ -125,30 +125,30 @@ const RecipesPage = () => {
               </div>
             </div>
           </div>
-          <div className="recipeContainerBody flex">
-            <div className="w-full md:w-1/2">
+          <div className="flex flex-col md:flex-row justify-between">
+            <div className="w-full md:w-[40%]">
               <h2 className="text-xl font-semibold">Instructions</h2>
               <p className="text-xs">{recipe.instructions}</p>
             </div>
-            <div className="containerIngredients w-full md:w-1/2">
+            <div className=" w-full md:w-[40%]">
               <h2 className="text-xl font-semibold">Ingredients</h2>
-              <p className="text-xs">{recipe.ingredients}</p>
+              <p className="text-xs text-justify">{recipe.ingredients}</p>
             </div>
           </div>
         </div>
 
-        <div className="addCommentSection mt-10">
-          <div className="addCommentH1 text-center">
+        <div className=" mt-10">
+          <div className=" text-center">
             <h1 className="text-3xl font-semibold">Add a Comment</h1>
           </div>
           <AddCommentForm />
         </div>
 
-        <div className="CommentsSection mt-10">
+        <div className=" mt-10">
           <h1 className="text-3xl font-semibold mt-28 flex justify-center">
             Comments
           </h1>
-          <div className="commentsGrid flex flex-wrap gap-4 mt-20">
+          <div className=" flex flex-wrap gap-4 mt-20">
             {recipe.comment.map((comment, index) => {
               return (
                 <div

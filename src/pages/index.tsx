@@ -16,10 +16,10 @@ export default function Home() {
   }, []);
 
   return (
-    <section className=" w-full">
+    <section className="w-full bg-yellow-50">
       <main className="w-full">
         <NavigationBar />
-        <div className="h-[30vh] md:h-[70vh] w-full bg-cover bg-center bg-no-repeat bg-[url('/hero.png')] ">
+        <div className="h-[30vh] md:h-[70vh] w-full bg-cover bg-center bg-no-repeat bg-[url('/hero.png')] relative ">
           <div className="text-2xl md:text-6xl font-serif max-w-full w-[50vw] relative md:top-[120px] text-center pt-10 ">
             <div className=" flex flex-row md:flex-col">
               <span className="mr-3">Home</span>
@@ -30,7 +30,7 @@ export default function Home() {
         </div>
       </main>
 
-      <div>
+      <div className=" bg-yellow-50">
         {recipes && <RecipeList recipes={recipes} />}
 
         <AddNewRecipeButton />
