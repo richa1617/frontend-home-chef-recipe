@@ -43,6 +43,7 @@ function Edit() {
   const router = useRouter();
   let id = Number(router.query.id);
 
+  const [isUpdated, setIsUpdated] = useState<string | null>("");
   const [item, setItem] = useState<Recipe | null>(null);
 
   useEffect(() => {
@@ -71,17 +72,25 @@ function Edit() {
   });
 
   async function handleFormSubmit(data: DataFromForm) {
-    console.log("clicked");
-    console.log(data);
     try {
-      const id = Number(router.query.id); //
+      const id = Number(router.query.id);
       const response = await axios.patch(
         `http://localhost:3000/edit/${id}`,
         data
       );
-      console.log(response);
+
+      // If the update is successful, show a success message
+      if (response.status === 200) {
+        setIsUpdated("Updated successfully");
+
+        // Redirect to the home page after a brief delay (e.g., 2 seconds)
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
+      }
     } catch (error) {
       console.log(error);
+      setIsUpdated("Try again later");
     }
   }
 
@@ -93,6 +102,7 @@ function Edit() {
   if (!item) {
     return <p>Loading...</p>;
   }
+
   return (
     <>
       <NavigationBar />
@@ -225,6 +235,7 @@ function Edit() {
         >
           Cancel
         </button>
+        <p className="mt-2">{isUpdated}</p>
       </form>
     </>
   );
