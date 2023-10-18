@@ -57,6 +57,10 @@ function Dashboard() {
     router.push(`/edit/${editId}`);
   }
 
+  function deleteHandler(deleteId: Number) {
+    router.push(`/delete/${deleteId}`);
+  }
+
   if (!userRecipe) {
     return <p>Loading</p>;
   }
@@ -94,7 +98,12 @@ function Dashboard() {
                 >
                   Edit
                 </button>
-                <button className="bg-[#0D0D0D] text-[#FFF] text-sm font-semibold py-2 px-4 rounded-lg hover:bg-[#0D0D0D] hover:text-[#FFF] transition duration-300 ease-in-out">
+                <button
+                  className="bg-[#0D0D0D] text-[#FFF] text-sm font-semibold py-2 px-4 rounded-lg hover:bg-[#0D0D0D] hover:text-[#FFF] transition duration-300 ease-in-out"
+                  onClick={() => {
+                    deleteHandler(recipe.id);
+                  }}
+                >
                   Delete
                 </button>
               </div>
