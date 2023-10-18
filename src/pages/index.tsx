@@ -1,11 +1,9 @@
-import Head from "next/head";
-
 import NavigationBar from "@/components/NavigationBar";
 
 import RecipeList, { Recipe } from "@/components/recipe";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Dashboard from "./dashboard";
+import AddNewRecipeButton from "@/components/AddNewRecipeButton";
 
 export default function Home() {
   const [recipes, setRecipes] = useState<null | Recipe[]>(null);
@@ -34,13 +32,8 @@ export default function Home() {
 
       <div>
         {recipes && <RecipeList recipes={recipes} />}
-        <div className="add_recipe_button bg-[url('/bg-homepage-button-new-recipe.png')] bg-center bg-cover bg-no-repeat w-[70vw] h-[40vh] rounded-3xl mx-auto my-40 flex justify-center items-center">
-          <div className="add_recipe_text text-5xl">
-            <a href="/add-recipe" className="text-black no-underline">
-              Add <br /> New <br /> Recipe
-            </a>
-          </div>
-        </div>
+
+        <AddNewRecipeButton />
       </div>
     </section>
   );

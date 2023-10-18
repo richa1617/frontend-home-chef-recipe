@@ -15,6 +15,7 @@ import axios from "axios";
 
 export default function AddRecipe() {
   const [error, setError] = useState<string | null>(null);
+
   const router = useRouter();
   useEffect(() => {
     const tokenFromLS = localStorage.getItem("token");
@@ -27,6 +28,19 @@ export default function AddRecipe() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    const checkboxes = event.currentTarget.querySelectorAll(
+      'input[type="checkbox"]'
+    );
+
+    // Check if at least one checkbox is checked
+    const atLeastOneChecked = Array.from(checkboxes).some(
+      (checkbox) => (checkbox as HTMLInputElement).checked
+    );
+    if (!atLeastOneChecked) {
+      alert("Please select at least one category.");
+      return;
+    }
 
     const categoryChecked = {
       breakfast: event.currentTarget.breakfast.checked, //true
@@ -59,9 +73,6 @@ export default function AddRecipe() {
     if (!tokenFromLS) {
       return;
     }
-    console.log(tokenFromLS);
-
-    console.log(formData);
 
     try {
       const response = await axios.post(
@@ -73,8 +84,13 @@ export default function AddRecipe() {
           },
         }
       );
-      console.log(response);
-      setError(null);
+
+      if (response.status === 200) {
+        setError(null);
+        router.push("/");
+      } else {
+        setError("Something went wrong");
+      }
     } catch (error) {
       setError("Something went wrong");
     }
@@ -99,6 +115,7 @@ export default function AddRecipe() {
           type="text"
           id="recipe-name"
           name="recipeName"
+          required
           className="w-full max-w-full mb-5 mt-2 p-3 border-2 border-solid border-gray-300 rounded-md"
         />
         <label htmlFor="instructions">Instructions</label>
@@ -108,12 +125,14 @@ export default function AddRecipe() {
           name="instructions"
           rows={8}
           className="w-full max-w-full mb-5 p-3 border-2 border-solid border-gray-300 rounded-md"
+          required
         ></textarea>
         <label htmlFor="ingredients">Ingredients</label>
         <br />
         <textarea
           id="ingredients"
           name="ingredients"
+          required
           rows={5}
           className="w-full max-w-full mb-5 p-3 border-2 border-solid border-gray-300 rounded-md"
         ></textarea>
@@ -125,6 +144,7 @@ export default function AddRecipe() {
               type="number"
               id="prep_time"
               name="prepTime"
+              required
               className="w-full p-2 border-2 border-solid border-gray-300 rounded-md"
             />
           </div>
@@ -134,6 +154,7 @@ export default function AddRecipe() {
             <br />
             <input
               type="number"
+              required
               id="serves"
               name="servers"
               className="w-full p-2 border-2 border-solid border-gray-300 rounded-md"
@@ -147,6 +168,7 @@ export default function AddRecipe() {
           type="text"
           id="img"
           name="img"
+          required
           className="w-full max-w-full mb-5 p-3 border-2 border-solid border-gray-300 rounded-md"
         />
         <h3 className="add_recipe_form_category_heading mb-4">Category</h3>
