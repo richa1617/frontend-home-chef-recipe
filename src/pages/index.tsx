@@ -19,9 +19,9 @@ export default function Home() {
     <section className="w-full bg-yellow-50">
       <main className="w-full">
         <NavigationBar />
-        <div className="h-[30vh] md:h-[70vh] w-full bg-cover bg-center bg-no-repeat bg-[url('/hero.png')] relative ">
-          <div className="text-2xl md:text-6xl font-serif max-w-full w-[50vw] relative md:top-[120px] text-center pt-10 ">
-            <div className=" flex flex-row md:flex-col">
+        <div className="h-[30vh] md:h-[70vh] w-full bg-cover bg-center bg-no-repeat bg-[url('/hero.png')] flex items-center ">
+          <div className="text-4xl md:text-6xl font-serif max-w-full w-[50vw] relative text-center pt-10">
+            <div className=" flex flex-col">
               <span className="mr-3">Home</span>
               <span className="mr-3">Chef</span>
               <span>Recipe</span>

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import AddCommentForm from "@/components/AddCommentForm";
 import NavigationBar from "@/components/NavigationBar";
+import People from "@/components/People";
 
 interface Recipe {
   id: number;
@@ -59,13 +60,13 @@ const RecipesPage = () => {
     return <div>Loading ...</div>;
   }
 
-  const servesAsString = String(recipe.serves);
-  const prepTimeAsString = String(recipe.prep_time);
-  const recipeCategories = recipe.category;
+  // const servesAsString = String(recipe.serves);
+  // const prepTimeAsString = String(recipe.prep_time);
+  // const recipeCategories = recipe.category;
 
   return (
     <>
-      <div className="w-full min-h-screen">
+      <div className="w-full min-h-screen border-2 border-red-300 border-solid">
         <div className=" bg-[#febd2f] relative z-10 w-full">
           <NavigationBar />
         </div>
@@ -101,38 +102,45 @@ const RecipesPage = () => {
           </div>
         </div>
 
-        <div className="w-full md:w-[70%] mx-auto bg-white rounded-lg shadow-lg relative z-100 -mt-10 p-10 border-2 flex flex-col h-[50vh] -mt-20px ">
-          <div className=" flex justify-between border-b border-gray-300 pb-4 mb-4">
+        <div className="w-full md:w-[60%] mx-auto bg-white rounded-[20px] shadow-lg relative z-100 -mt-10 py-4 px-6 border-2 flex flex-col h-[50vh] -mt-20px ">
+          <div className="flex justify-between border-b-[1px] border-gray-700 pb-2 mb-2 border-dashed flex-col sm:flex-row">
             <h2 id="recipeTitle" className="text-xl font-semibold">
               {recipe.name}
             </h2>
-            <div className=" flex ">
-              <div className="text-gray-500 mr-4">
-                <h2 id="u1" className="font-semibold">
-                  Serves
+            <div className="flex flex-col sm:flex-row mt-2 sm:mt-0 ">
+              <div className="flex items-center mb-2 sm:mb-0">
+                <h2 className="font-semibold text-sm text-black mr-1">
+                  Serves:
                 </h2>
-                <h2 id="b1" className="text-xl">
-                  {servesAsString}
+                <h2 className=" text-gray-400 mr-3 text-sm flex flex-row text-xs">
+                  <People count={recipe.serves} />
                 </h2>
               </div>
-              <div className="text-gray-500">
-                <h2 id="u2" className="font-semibold">
-                  Prep Time
+              <div className="flex items-center md:ml-4">
+                <h2 className="font-semibold text-black mr-1 text-sm">
+                  Prep Time:
                 </h2>
-                <h2 id="b2" className="text-xl">
-                  {prepTimeAsString}
+                <h2 className=" text-gray-400 text-sm">
+                  {recipe.prep_time} min
                 </h2>
               </div>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row justify-between">
-            <div className="w-full md:w-[40%]">
+
+          <div className="flex flex-col md:flex-row justify-between mt-10">
+            <div className="w-full md:w-[40%]  mb-6">
               <h2 className="text-xl font-semibold">Instructions</h2>
               <p className="text-xs">{recipe.instructions}</p>
             </div>
-            <div className=" w-full md:w-[40%]">
+            <div className=" w-full md:w-[40%] ">
               <h2 className="text-xl font-semibold">Ingredients</h2>
-              <p className="text-xs text-justify">{recipe.ingredients}</p>
+              <ul className="list-disc list-inside text-xs text-justify">
+                {recipe.ingredients.split(", ").map((ingredient, index) => (
+                  <li key={index}>
+                    {ingredient.charAt(0).toUpperCase() + ingredient.slice(1)}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -148,7 +156,7 @@ const RecipesPage = () => {
           <h1 className="text-3xl font-semibold mt-28 flex justify-center">
             Comments
           </h1>
-          <div className=" flex flex-wrap gap-4 mt-20">
+          <div className=" flex flex-wrap mt-20">
             {recipe.comment.map((comment, index) => {
               return (
                 <div

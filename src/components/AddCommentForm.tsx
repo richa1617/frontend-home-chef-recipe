@@ -38,16 +38,16 @@ const AddCommentForm = () => {
       <form
         onSubmit={handleSubmit}
         action=""
-        className="bg-white w-[40vw] h-[50vh] ml-10vw rounded-3xl p-8 flex flex-col justify-between shadow-lg mx-auto"
+        className="bg-white w-[85vw] md:w-[40vw] h-[50vh] rounded-3xl p-8 flex flex-col justify-between shadow-lg mx-auto"
       >
-        <div className="flex justify-between">
+        <div className="flex md:flex-row flex-col justify-between">
           <div className="flex flex-col">
             <label htmlFor="name">Name</label>
             <input
               name="commenterName"
               id="name"
               type="text"
-              className="border border-gray-300 p-2 rounded"
+              className="border border-gray-300 p-2 rounded mb-4"
             />
           </div>
           <div className="flex flex-col">
@@ -60,7 +60,7 @@ const AddCommentForm = () => {
             />
           </div>
         </div>
-        <div className="mt-2 flex flex-col">
+        <div className="flex flex-col">
           <label htmlFor="message">Review</label>
           <textarea
             name="message"
