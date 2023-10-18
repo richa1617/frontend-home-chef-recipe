@@ -36,7 +36,7 @@ interface Category {
 const RecipesPage = () => {
   const router = useRouter();
   const idFromUrl = router.query.recipeId;
-  console.log(idFromUrl);
+
   const [recipe, setRecipe] = useState<Recipe | null>(null);
 
   useEffect(() => {
@@ -50,7 +50,6 @@ const RecipesPage = () => {
       );
 
       setRecipe(recipe.data);
-      console.log(recipe.data);
     };
     getRecipeFromApi();
   }, [idFromUrl]);
@@ -66,7 +65,7 @@ const RecipesPage = () => {
 
   return (
     <>
-      <div className="w-full min-h-screen border-2 border-red-300 border-solid">
+      <div className="w-full min-h-screen ">
         <div className=" bg-[#febd2f] relative z-10 w-full">
           <NavigationBar />
         </div>
@@ -104,7 +103,10 @@ const RecipesPage = () => {
 
         <div className="w-full md:w-[60%] mx-auto bg-white rounded-[20px] shadow-lg relative z-100 -mt-10 py-4 px-6 border-2 flex flex-col h-[50vh] -mt-20px ">
           <div className="flex justify-between border-b-[1px] border-gray-700 pb-2 mb-2 border-dashed flex-col sm:flex-row">
-            <h2 id="recipeTitle" className="text-xl font-semibold">
+            <h2
+              id="recipeTitle"
+              className="text-xl font-semibold text-[#febd2f]"
+            >
               {recipe.name}
             </h2>
             <div className="flex flex-col sm:flex-row mt-2 sm:mt-0 ">
@@ -112,7 +114,7 @@ const RecipesPage = () => {
                 <h2 className="font-semibold text-sm text-black mr-1">
                   Serves:
                 </h2>
-                <h2 className=" text-gray-400 mr-3 text-sm flex flex-row text-xs">
+                <h2 className=" text-gray-400 mr-3 text-sm flex flex-row ">
                   <People count={recipe.serves} />
                 </h2>
               </div>

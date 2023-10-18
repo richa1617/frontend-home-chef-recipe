@@ -1,38 +1,71 @@
 import axios from "axios";
 import { useRouter } from "next/router";
+import { SetStateAction, useState } from "react";
+import Star from "./Star";
 
 const AddCommentForm = () => {
   const router = useRouter();
   const recipeId = router.query.recipeId;
-  console.log(recipeId);
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    const postComment = async (
-      name: string,
-      rating: number,
-      message: string
-    ) => {
-      await axios.post(`http://localhost:3000/comments/${recipeId}`, {
-        name: name,
-        rating: rating,
-        message: message,
-      });
-    };
 
+  const [rating, setRating] = useState(0);
+  const [error, setError] = useState<null | string>(null);
+  const changeRating = (newRating: number) => {
+    setRating(newRating);
+    console.log(rating);
+  };
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
     const nameFromCommentForm = event.currentTarget.commenterName.value;
-    const ratingFromCommentForm = event.currentTarget.rating.value;
+    const ratingFromCommentForm = rating;
+    console.log(ratingFromCommentForm);
     const reviewFromCommentForm = event.currentTarget.message.value;
 
-    console.log(nameFromCommentForm);
-    console.log(ratingFromCommentForm);
-    console.log(reviewFromCommentForm);
-    postComment(
-      nameFromCommentForm,
-      ratingFromCommentForm,
-      reviewFromCommentForm
-    );
-    console.log("New comment has been posted to database");
-  };
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/comments/${recipeId}`,
+        {
+          name: nameFromCommentForm,
+          rating: ratingFromCommentForm,
+          message: reviewFromCommentForm,
+        }
+      );
+
+      if (response.status === 200) {
+        router.reload();
+      } else {
+        setError("Something went wrong");
+      }
+    } catch (error) {
+      setError("Something went wrong");
+    }
+  }
+
+  //   const postComment = async (
+  //     name: string,
+  //     rating: number,
+  //     message: string
+  //   ) => {
+  //     await axios.post(`http://localhost:3000/comments/${recipeId}`, {
+  //       name: name,
+  //       rating: rating,
+  //       message: message,
+  //     });
+  //   };
+
+  //   event.preventDefault();
+  //   const nameFromCommentForm = event.currentTarget.commenterName.value;
+  //   const ratingFromCommentForm = event.currentTarget.rating.value;
+  //   const reviewFromCommentForm = event.currentTarget.message.value;
+
+  //   postComment(
+  //     nameFromCommentForm,
+  //     ratingFromCommentForm,
+  //     reviewFromCommentForm
+  //   );
+  //   console.log("New comment has been posted to database");
+  // };
   return (
     <>
       <form
@@ -47,17 +80,24 @@ const AddCommentForm = () => {
               name="commenterName"
               id="name"
               type="text"
-              className="border border-gray-300 p-2 rounded mb-4"
+              className="border border-gray-300 p-2 rounded mb-4  w-[80%]"
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="rating">Rating</label>
-            <input
-              name="rating"
-              id="rating"
-              type="number"
-              className="border border-gray-300 p-2 rounded"
-            />
+            <label htmlFor="rating" className="">
+              Rating
+            </label>
+            <span className="flex flex-row mt-2">
+              {[1, 2, 3, 4, 5].map((value) => (
+                <Star
+                  key={value}
+                  name="rating"
+                  filled={value <= rating}
+                  onClick={changeRating}
+                  value={value}
+                />
+              ))}
+            </span>
           </div>
         </div>
         <div className="flex flex-col">
@@ -74,6 +114,7 @@ const AddCommentForm = () => {
         >
           Save
         </button>
+        <p className="mt-4 text-red-500"> {error}</p>
       </form>
     </>
   );
