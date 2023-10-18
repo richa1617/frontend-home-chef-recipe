@@ -33,6 +33,7 @@ export interface Recipe {
 
 function Dashboard() {
   const [userRecipe, setuserRecipe] = useState<null | Recipe[]>(null);
+  const [isDeleted, setIsDeleted] = useState<null | string>(null);
   const router = useRouter();
 
   // Recipe serves icons
@@ -57,8 +58,36 @@ function Dashboard() {
     router.push(`/edit/${editId}`);
   }
 
-  function deleteHandler(deleteId: Number) {
-    router.push(`/delete/${deleteId}`);
+  function deleteHandler(id: number) {
+    // Ask for confirmation
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this recipe?"
+    );
+
+    if (confirmDelete) {
+      const deleteItem = async () => {
+        try {
+          const response = await axios.delete(
+            `http://localhost:3000/delete/${id}`
+          );
+          console.log(response.data);
+
+          if (response.status === 200) {
+            setIsDeleted("Deleting....!");
+
+            // Redirect to the home page after a brief delay (e.g., 2 seconds)
+            setTimeout(() => {
+              router.push("/");
+            }, 1000);
+          }
+        } catch (error) {
+          console.error("Error deleting item:", error);
+
+          // Optionally, you can show an error message here or perform any other action
+        }
+      };
+      deleteItem();
+    }
   }
 
   if (!userRecipe) {
@@ -106,6 +135,7 @@ function Dashboard() {
                 >
                   Delete
                 </button>
+                <p className="mt-2 text-xs">{isDeleted}</p>
               </div>
             </div>
           </section>
